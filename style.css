@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+main{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    background-color: #222;
+    overflow: hidden;
+
+}
+.container{
+    border-radius: 30px;
+    margin: auto;
+    background: linear-gradient(45deg,rgba(162, 62, 122, 0.966), rgb(47, 190, 209));
+    height: 100%;
+    width: 80%;
+}
+.nav{
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.nav .search{
+    display: flex;
+    gap: 10px;
+}
+.nav button{
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.849);
+}
+.nav input{
+    outline: 0;
+    color: rgba(0, 0, 0, 0.627);
+    height: 5vh;
+    border-radius: 20px;
+    border: none;
+    font-size: large;
+    width: 50vw;
+    padding: 8px;
+    
+}
+.nav img{
+    height: 25px;
+    margin: auto;
+}
+.nav .search-icon{
+    width: 40px;
+    height: 5vh;
+    border-radius: 50%;
+    background-color: aliceblue;
+    display: flex;
+}
+.place-name{
+    display: flex;
+    flex-direction: column;
+}
+.place-name>img,.place-name>h2{
+    margin: auto;
+}
+.place-name>h2{
+    font-size: 40px;
+    font-weight: 500;
+}
+.weather-details{
+    height: 34vh;
+    display: flex;
+    
+    align-items: center;
+
+}
+.humidity,.wind-speed{
+    display: flex;
+    gap: 1vh;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+
+}
+h3{
+    font-size: 25px;
+    
+}
+p{
+    font-size: 15px;
+}
+.weather-details img{
+    width: 60%;
+}
+
+
+@media screen and (max-width : 485px) {
+    .nav input{
+        height: 30px;
+    }
+    .nav img{
+        width: 15px;
+        height: 15px;
+    }
+    .nav .search-icon{
+        height: 30px;
+        width: 30px;
+    }
+    .humidity,.wind-speed{
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: 70%;
+    
+    }
+    .humidity img{
+        width: auto;
+    }
+    .wind-speed img{
+        width: auto;
+    }
+    .weather-details{
+
+        flex-direction: column;
+        row-gap: 5vh;
+    }
+    .place-name>img{
+        width: 50%;
+    }
+    .place-name h2{
+        margin-top: -20px;
+    }
+    .place-name{
+        row-gap: 0;
+        height: 50vh;
+    }
+    .container{
+        width: 90%;
+        height: 98%;
+    }
+    main{
+        background-color: #2b68d2a3;
+    }
+    
+}
