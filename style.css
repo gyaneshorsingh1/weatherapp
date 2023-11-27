@@ -10,15 +10,18 @@ main{
     width: 100vw;
     display: flex;
     background-color: #222;
-    overflow: hidden;
+
 
 }
 .container{
+    
     border-radius: 30px;
     margin: auto;
     background: linear-gradient(45deg,rgba(162, 62, 122, 0.966), rgb(47, 190, 209));
-    height: 100%;
+    height: 90%;
     width: 80%;
+    overflow: hidden;
+    
 }
 .nav{
     height: 15vh;
@@ -32,6 +35,7 @@ main{
     gap: 10px;
 }
 .nav button{
+    
     outline: none;
     border-color: rgba(255, 255, 255, 0.849);
 }
@@ -50,6 +54,7 @@ main{
     height: 25px;
     margin: auto;
 }
+
 .nav .search-icon{
     width: 40px;
     height: 5vh;
@@ -60,16 +65,22 @@ main{
 .place-name{
     display: flex;
     flex-direction: column;
+    height: 45vh;
 }
 .place-name>img,.place-name>h2{
     margin: auto;
 }
+.place-name>img{
+    width: auto;
+}
+
 .place-name>h2{
     font-size: 40px;
     font-weight: 500;
 }
 .weather-details{
-    height: 34vh;
+    padding: 20px;
+    height: 30vh;
     display: flex;
     
     align-items: center;
@@ -109,37 +120,48 @@ p{
     }
     .humidity,.wind-speed{
         justify-content: space-between;
-        flex-wrap: wrap;
+
         width: 70%;
+        
     
     }
+    .wind-speed h3, .wind-speed p{
+        font-size: 15px;
+
+    }
     .humidity img{
-        width: auto;
+        width: 70%;
     }
     .wind-speed img{
-        width: auto;
+        width: 70%;
+
     }
     .weather-details{
-
+        
         flex-direction: column;
         row-gap: 5vh;
+    }
+    .place-name .weather-icon{
+        width: 35%;
     }
     .place-name>img{
         width: 50%;
     }
-    .place-name h2{
-        margin-top: -20px;
-    }
+
     .place-name{
-        row-gap: 0;
-        height: 50vh;
+        margin-bottom: 2vh;
+        height: 40vh;
+    }
+    .place-name .city{
+        margin-bottom: 8vh;
+        font-size: 35px;
     }
     .container{
         width: 90%;
-        height: 98%;
     }
     main{
-        background-color: #2b68d2a3;
+        padding: 10px;
+        background-color: #2b68d25f;
     }
     
 }
