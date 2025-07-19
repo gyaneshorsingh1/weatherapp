@@ -1,167 +1,205 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-}
-main{
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    background-color: #222;
-
-
-}
-.container{
-    
-    border-radius: 30px;
-    margin: auto;
-    background: linear-gradient(45deg,rgba(162, 62, 122, 0.966), rgb(47, 190, 209));
-    height: 90%;
-    width: 80%;
-    overflow: hidden;
-    
-}
-.nav{
-    height: 15vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
-.nav .search{
-    display: flex;
-    gap: 10px;
-}
-.nav button{
-    
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.849);
-}
-.nav input{
-    outline: 0;
-    color: rgba(0, 0, 0, 0.627);
-    height: 5vh;
-    border-radius: 20px;
-    border: none;
-    font-size: large;
-    width: 50vw;
-    padding: 8px;
-    
-}
-.nav img{
-    height: 25px;
-    margin: auto;
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.nav .search-icon{
-    width: 40px;
-    height: 5vh;
-    border-radius: 50%;
-    background-color: aliceblue;
-    display: flex;
-}
-.place-name{
-    display: flex;
-    flex-direction: column;
-    height: 45vh;
-}
-.place-name>img,.place-name>h2{
-    margin: auto;
-}
-.place-name>img{
-    width: auto;
+body {
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
 }
 
-.place-name>h2{
-    font-size: 40px;
-    font-weight: 500;
-}
-.weather-details{
-    padding: 20px;
-    height: 30vh;
-    display: flex;
-    
-    align-items: center;
-
-}
-.humidity,.wind-speed{
-    display: flex;
-    gap: 1vh;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-
-}
-h3{
-    font-size: 25px;
-    
-}
-p{
-    font-size: 15px;
-}
-.weather-details img{
-    width: 60%;
+main {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
 }
 
+/* Glass Card Container */
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
 
-@media screen and (max-width : 485px) {
-    .nav input{
-        height: 30px;
-    }
-    .nav img{
-        width: 15px;
-        height: 15px;
-    }
-    .nav .search-icon{
-        height: 30px;
-        width: 30px;
-    }
-    .humidity,.wind-speed{
-        justify-content: space-between;
+/* Search */
+.nav .search {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
 
-        width: 70%;
-        
-    
-    }
-    .wind-speed h3, .wind-speed p{
-        font-size: 15px;
+.nav input {
+    text-transform: capitalize;
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+}
 
-    }
-    .humidity img{
-        width: 70%;
-    }
-    .wind-speed img{
-        width: 70%;
+.nav button {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 
-    }
-    .weather-details{
-        
-        flex-direction: column;
-        row-gap: 5vh;
-    }
-    .place-name .weather-icon{
-        width: 35%;
-    }
-    .place-name>img{
-        width: 50%;
-    }
+.nav button img {
+  width: 22px;
+}
 
-    .place-name{
-        margin-bottom: 2vh;
-        height: 40vh;
-    }
-    .place-name .city{
-        margin-bottom: 8vh;
-        font-size: 35px;
-    }
-    .container{
-        width: 90%;
-    }
-    main{
-        padding: 10px;
-        background-color: #2b68d25f;
-    }
-    
+/* Current Weather Display */
+.place-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.place-name img.weather-icon {
+  width: 100px;
+}
+
+.place-name .temp {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.place-name .city {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.loader {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Current Weather Details */
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.humidity,
+.wind-speed {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 12px;
+  border-radius: 15px;
+  flex: 1;
+}
+
+.humidity img,
+.wind-speed img {
+  width: 30px;
+  height: 30px;
+}
+
+.humidity-details,
+.wind-speed-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+/* Forecast */
+.forecast-container {
+  margin-top: 20px;
+}
+
+.forecast-container h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.forecast {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.forecast-day {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 10px;
+  min-width: 90px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.forecast-day img {
+  width: 50px;
+  margin: 0 auto;
+}
+
+.forecast-day h4 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.forecast-day p {
+  font-size: 12px;
+}
+
+/* Scrollbar hidden */
+.forecast::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.weather-app {
+  transition: background 0.5s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+/* Example background images or animated gifs */
+.clear-bg {
+  background-image: url('https://i.gifer.com/7efs.gif'); /* sunny gif */
+}
+.cloudy-bg {
+  background-image: url('https://i.gifer.com/BQy7.gif'); /* clouds */
+}
+.rainy-bg {
+  background-image: url('https://i.gifer.com/VAyR.gif'); /* rain */
+}
+.storm-bg {
+  background-image: url('https://i.gifer.com/BJvL.gif'); /* thunderstorm */
+}
+.snow-bg {
+  background-image: url('https://i.gifer.com/ZgA6.gif'); /* snow */
+}
+.mist-bg {
+  background-image: url('https://i.gifer.com/VybJ.gif'); /* fog */
 }
