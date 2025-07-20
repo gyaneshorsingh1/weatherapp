@@ -15,9 +15,45 @@ const iconMap = {
   Mist: "mist.png"
 };
 
-// Get current weather data
+
+
+
+function setLoadingState(isLoading) {
+  const temp = document.querySelector(".temp");
+  const city = document.querySelector(".city");
+  const humidity = document.querySelector(".humidity-value");
+  const wind = document.querySelector(".wind");
+
+  const humidityIcon = document.querySelector(".humidity-icon");
+  const windIcon = document.querySelector(".wind-icon");
+
+  const elements = [temp, city, humidity, wind];
+  const iconElements = [humidityIcon, windIcon];
+
+  elements.forEach(el => {
+    if (isLoading) {
+      el.classList.add("skeleton");
+      el.textContent = "";
+    } else {
+      el.classList.remove("skeleton");
+    }
+  });
+
+  iconElements.forEach(icon => {
+    if (isLoading) {
+      icon.classList.add("skeleton");
+    } else {
+      icon.classList.remove("skeleton");
+    }
+  });
+}
+
+
+
 async function checkweather(city) {
   if (!city) return;
+
+  setLoadingState(true); // Start shimmer
 
   try {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
@@ -25,38 +61,57 @@ async function checkweather(city) {
 
     const data = await response.json();
 
-    document.querySelector(".city").innerHTML = data.name;
-    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
-    document.querySelector(".humidity-value").innerHTML = data.main.humidity + "%";
-    document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+    // Assign data (after shimmer delay)
+    document.querySelector(".city").textContent = data.name;
+    document.querySelector(".temp").textContent = Math.round(data.main.temp) + "°c";
+    document.querySelector(".humidity-value").textContent = data.main.humidity + "%";
+    document.querySelector(".wind").textContent = data.wind.speed + " km/h";
 
     const mainWeather = data.weather[0].main;
     weatherIcon.src = `weather-app-img/${iconMap[mainWeather] || "clear.png"}`;
     weatherIcon.alt = mainWeather;
 
-    await showForecast(city);  // Fetch 5-day forecast
-
+    await showForecast(city);
   } catch (error) {
     alert(error.message || "Something went wrong.");
-    document.querySelector(".city").innerHTML = "City not found";
-    document.querySelector(".temp").innerHTML = "--";
-    document.querySelector(".humidity-value").innerHTML = "--";
-    document.querySelector(".wind").innerHTML = "--";
+    document.querySelector(".city").textContent = "City not found";
+    document.querySelector(".temp").textContent = "--";
+    document.querySelector(".humidity-value").textContent = "--";
+    document.querySelector(".wind").textContent = "--";
     weatherIcon.src = "weather-app-img/clear.png";
   }
+
+  setLoadingState(false); // Stop shimmer
 }
+
+
+
+
 
 // Fetch 5-day forecast
 async function showForecast(city) {
   const forecastContainer = document.getElementById("forecast");
+
+  // Step 1: Immediately add 5 skeleton forecast cards to keep the layout stable
   forecastContainer.innerHTML = "";
+  for (let i = 0; i < 5; i++) {
+    const skeletonCard = document.createElement("div");
+    skeletonCard.className = "forecast-day skeleton";
+    skeletonCard.style.height = "120px";
+    skeletonCard.style.minWidth = "90px";
+    forecastContainer.appendChild(skeletonCard);
+  }
 
   try {
+    // Step 2: Fetch forecast data
     const response = await fetch(forecastUrl + city + `&appid=${apiKey}`);
     const data = await response.json();
 
-    // Filter one forecast per day (12:00 PM)
+    // Step 3: Filter one forecast per day
     const dailyForecasts = data.list.filter(f => f.dt_txt.includes("12:00:00"));
+
+    // Step 4: Replace skeletons with actual data
+    forecastContainer.innerHTML = ""; // Replace only after data is ready
 
     dailyForecasts.forEach(forecast => {
       const date = new Date(forecast.dt * 1000);
@@ -66,7 +121,7 @@ async function showForecast(city) {
       const icon = forecast.weather[0].icon;
 
       const forecastHTML = `
-        <div class="forecast-day">
+        <div class="forecast-day fade-in">
           <h4>${day}</h4>
           <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${weather}">
           <p>${temp}°C</p>
@@ -81,6 +136,7 @@ async function showForecast(city) {
     forecastContainer.innerHTML = "<p>Error fetching forecast</p>";
   }
 }
+
 
 // Search on button click
 searchBtn.addEventListener("click", () => {

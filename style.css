@@ -18,7 +18,13 @@ body {
 main {
   width: 100%;
   max-width: 500px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
+  color: #fff;
 }
 
 /* Glass Card Container */
@@ -32,6 +38,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  width: 100%;
+  height: 100%;
 }
 
 /* Search */
@@ -101,7 +109,30 @@ main {
   display: flex;
   justify-content: space-between;
   gap: 15px;
+  overflow-x: auto;
 }
+
+/* For icon shimmer */
+.icon-wrapper {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper.skeleton {
+  background: linear-gradient(100deg, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+.icon-wrapper.skeleton img {
+  opacity: 0; /* hide actual icon while loading */
+}
+
 
 .humidity,
 .wind-speed {
@@ -171,7 +202,7 @@ main {
 }
 
 /* Scrollbar hidden */
-.forecast::-webkit-scrollbar {
+.forecast::-webkit-scrollbar,.weather-details::-webkit-scrollbar {
   display: none;
 }
 
@@ -182,6 +213,7 @@ main {
   background-size: cover;
   background-position: center;
   min-height: 100vh;
+  color: #fff;
 }
 
 /* Example background images or animated gifs */
@@ -202,4 +234,200 @@ main {
 }
 .mist-bg {
   background-image: url('https://i.gifer.com/VybJ.gif'); /* fog */
+}
+
+
+
+/* Skeleton Loader Base */
+.skeleton {
+  background: linear-gradient(100deg, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 8px;
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+
+
+/* Smooth transitions for all major components */
+.temp,
+.city,
+.humidity-value,
+.wind,
+.humidity,
+.wind-speed,
+.forecast-day,
+.place-name img.weather-icon,
+.icon-wrapper,
+.icon-wrapper img {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Fix min-height/min-width to prevent collapsing during loading */
+.temp,
+.city,
+.humidity-value,
+.wind {
+  min-height: 28px;
+}
+
+.forecast-day {
+  min-height: 120px;
+  min-width: 90px;
+}
+
+.place-name img.weather-icon {
+  min-height: 100px;
+  min-width: 100px;
+}
+
+.icon-wrapper {
+  min-width: 30px;
+  min-height: 30px;
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.4s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  main {
+    padding: 15px;
+  }
+
+  .container {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .place-name img.weather-icon {
+    width: 80px;
+    min-width: 90px;
+    min-height: 90px;
+    padding: 0;
+    padding: 0;
+  }
+
+  .place-name .temp {
+    font-size: 32px;
+  }
+
+  .place-name .city {
+    font-size: 20px;
+  }
+
+
+
+  .humidity img,
+  .wind-speed img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .humidity-details,
+  .wind-speed-details {
+    font-size: 12px;
+  }
+
+  .nav input {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .nav button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .forecast-day {
+    min-width: 80px;
+    padding: 8px;
+  }
+
+  .forecast-day img {
+    width: 40px;
+  }
+
+  .forecast-day h4 {
+    font-size: 13px;
+  }
+
+  .forecast-day p {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+  padding: 0;
+}
+
+.search {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+  background: #ffffffd8;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 44px 12px 16px; /* right padding for button space */
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.search-button {
+  position: absolute;
+  background: transparent;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  
+}
+
+.search-button img {
+  width: 20px;
+  height: 20px;
+}
+
+  .weather-details {
+   
+    gap: 10px;
+  }
+
+  .humidity,
+  .wind-speed {
+    width: 100%;
+  }
+
+  .place-name .temp {
+    font-size: 28px;
+  }
+
+  .place-name .city {
+    font-size: 16px;
+  }
 }

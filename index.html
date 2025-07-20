@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <main>
     <div class="container">
       <!-- Search Bar -->
-     <nav class="nav">
-  <div class="search">
-    <input type="text" class="search-input" placeholder="Enter city name" spellcheck="false" />
-    <button class="search-button" aria-label="Search">
-      <img src="./weather-app-img/search.png" alt="Search" />
-    </button>
-  </div>
-</nav>
+      <nav class="nav">
+        <div class="search">
+          <input type="text" class="search-input" placeholder="Enter city name" spellcheck="false" />
+          <button class="search-button" aria-label="Search">
+            <img src="./weather-app-img/search.png" alt="Search" />
+          </button>
+        </div>
+      </nav>
 
 
       <!-- Current Weather -->
       <div class="place-name">
-        
+
         <img class="weather-icon" src="./weather-app-img/clear.png" alt="Weather Icon" />
         <h2 class="temp">0°C</h2>
         <h2 class="city">Loading</h2>
@@ -30,32 +32,44 @@
 
       <!-- Weather Details -->
       <div class="weather-details">
+        <!-- Humidity -->
         <div class="humidity">
-          <img src="./weather-app-img/humidity.png" alt="Humidity" />
+          <div class="icon-wrapper humidity-icon">
+            <img src="./weather-app-img/humidity.png" alt="Humidity" />
+          </div>
           <div class="humidity-details">
             <h3 class="humidity-value">0%</h3>
             <p>Humidity</p>
           </div>
         </div>
+
+        <!-- Wind -->
         <div class="wind-speed">
-          <img src="./weather-app-img/wind.png" alt="Wind" />
+          <div class="icon-wrapper wind-icon">
+            <img src="./weather-app-img/wind.png" alt="Wind" />
+          </div>
           <div class="wind-speed-details">
             <h3 class="wind">0 km/h</h3>
             <p>Wind Speed</p>
           </div>
         </div>
+
       </div>
 
       <!-- 5-Day Forecast -->
       <div class="forecast-container">
         <h3>5-Day Forecast</h3>
         <div class="forecast" id="forecast">
-          
+
         </div>
       </div>
+    </div>
+    <div id="loader" class="loader-overlay">
+      <div class="spinner"></div>
     </div>
   </main>
 
   <script src="script.js"></script>
 </body>
+
 </html>
